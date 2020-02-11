@@ -23,7 +23,11 @@ class S2SNLG:
         self._load_model(model_file, temp)
 
     def _load_model(self, model_path, temp):
-        model_params = pkl.load(io.open(model_path, 'rb'))
+        with open(model_path, 'rb') as f:
+            u = pkl._Unpickler(f)
+            u.encoding = 'latin1'
+            model_params = u.load()
+        # model_params = pkl.load(io.open(model_path, 'rb'))
         hidden_size = model_params['model']['Wd'].shape[0]
         output_size = model_params['model']['Wd'].shape[1]
 
