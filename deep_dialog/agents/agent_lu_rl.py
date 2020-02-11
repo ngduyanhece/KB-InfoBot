@@ -393,7 +393,7 @@ class E2ERLAgent:
                 L.set_all_param_values(item, data)
 
     def save_model(self, save_path):
-        with open(save_path, 'w') as f:
+        with open(save_path, 'wb') as f:
             data = L.get_all_param_values(self.network)
             pkl.dump(data, f)
             for item in self.trackers:
