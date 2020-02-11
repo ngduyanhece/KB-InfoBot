@@ -50,13 +50,13 @@ params['nlg_model_path'] = './data/pretrained/lstm_tanh_[1470015675.73]_115_120_
 config = importlib.import_module('settings.config_'+params['db'])
 agent_params = config.agent_params
 dataset_params = config.dataset_params
-for k,v in dataset_params[params['db']].iteritems():
+for k,v in dataset_params[params['db']].items():
     params[k] = v
-for k,v in agent_params[agent_map[params['agent_type']]].iteritems():
+for k,v in agent_params[agent_map[params['agent_type']]].items():
     params[k] = v
 
-print 'Dialog Parameters: '
-print json.dumps(params, indent=2)
+print('Dialog Parameters: ')
+print(json.dumps(params, indent=2))
 
 max_turn = params['max_turn']
 err_prob = params['err_prob']
@@ -151,7 +151,7 @@ elif agent_type == 'e2e-rl-soft':
             tr=params['tr'], ts=params['ts'], frac=params['frac'], max_req=params['max_req'],
             upd=params['upd'], name=params['model_name'])
 else:
-    print "Invalid agent!"
+    print("Invalid agent!")
     sys.exit()
 
 dialog_manager = DialogManager(agent, user_sim, db_full, db_inc, movie_kb, verbose=False)

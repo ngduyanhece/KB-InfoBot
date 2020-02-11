@@ -4,7 +4,7 @@
 import io
 import nltk
 import numpy as np
-import cPickle as pkl
+import pickle as pkl
 import os.path
 import string
 
@@ -28,7 +28,7 @@ class FeatureExtractor:
             pkl.dump(self.grams, f)
             pkl.dump(self.n, f)
             f.close()
-        print 'Vocab Size = %d' %self.n
+        print('Vocab Size = %d' %self.n)
 
     def _build_vocab_from_db(self, corpus):
         try:
@@ -100,6 +100,6 @@ class FeatureExtractor:
 
 if __name__=='__main__':
     F = FeatureExtractor('../data/corpora/selected_medium_corpus.txt','../data/selected_medium/db.txt')
-    print '\n'.join(F.grams.keys())
-    print F.featurize('Please search for the movie with Matthew Saville as director')
-    print F.featurize('I would like to see the movie with drama as genre')
+    print('\n'.join(F.grams.keys()))
+    print(F.featurize('Please search for the movie with Matthew Saville as director'))
+    print(F.featurize('I would like to see the movie with drama as genre'))

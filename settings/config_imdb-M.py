@@ -11,7 +11,7 @@ agent_params['nl-rule-no'] = {}
 agent_params['nl-rule-no']['ts'] = 0.5
 agent_params['nl-rule-no']['max_req'] = 4
 agent_params['nl-rule-no']['frac'] = 0.5
-agent_params['nl-rule-no']['upd'] = 05
+agent_params['nl-rule-no']['upd'] = 0.5
 
 agent_params['nl-rule-hard'] = {}
 agent_params['nl-rule-hard']['ts'] = 5.0

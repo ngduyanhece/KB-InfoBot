@@ -2,10 +2,10 @@
 '''
 
 from deep_dialog import dialog_config, tools
-from agent import Agent
-from softDB import SoftDB
-from belief_tracker import BeliefTracker
-from utils import *
+from .agent import Agent
+from .softDB import SoftDB
+from .belief_tracker import BeliefTracker
+from .utils import *
 
 from collections import Counter, defaultdict
 
@@ -16,7 +16,7 @@ import numpy as np
 import copy
 import re
 import nltk
-import cPickle as pkl
+import pickle as pkl
 
 class AgentNLRuleSoft(Agent,SoftDB,BeliefTracker):
 
@@ -49,9 +49,9 @@ class AgentNLRuleSoft(Agent,SoftDB,BeliefTracker):
         H_db = tools.entropy_p(db_probs)
         H_slots = calc_entropies(self.state['inform_slots'], db_probs, self.state['database'])
         if verbose:
-            print 'Agent DB entropy = ', H_db
-            print 'Agent slot belief entropies - '
-            print ' '.join(['%s:%.2f' %(k,v) for k,v in H_slots.iteritems()])
+            print('Agent DB entropy = ', H_db)
+            print('Agent slot belief entropies - ')
+            print(' '.join(['%s:%.2f' %(k,v) for k,v in H_slots.iteritems()]))
 
         if H_db < self.tr:
             # agent reasonable confident, inform

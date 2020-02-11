@@ -14,7 +14,7 @@ from deep_dialog import dialog_config
 from collections import Counter, defaultdict, deque
 
 import random
-import cPickle as pkl
+import pickle as pkl
 
 EPS = 1e-10
 
@@ -316,10 +316,10 @@ class E2ERLAgent:
         self._rl_train_fn(self.learning_rate)
 
     def _debug(self, inp, tur, act, rew, beliefs):
-        print 'Input = {}, Action = {}, Reward = {}'.format(inp, act, rew)
+        print('Input = {}, Action = {}, Reward = {}'.format(inp, act, rew))
         out = self.debug_fn(inp, tur, act, rew, *beliefs)
         for item in out:
-            print item
+            print(item)
 
     def _init_experience_pool(self, pool):
         self.input_pool = deque([], pool)
@@ -367,7 +367,7 @@ class E2ERLAgent:
         hi = [np.zeros((1,self.r_hid)).astype('float32') \
                 for s in dialog_config.inform_slots]
         pi = np.zeros((1,self.n_hid)).astype('float32')
-        if verbose: print i, t, a, r, d, ds, p, ph, hi
+        if verbose: print(i, t, a, r, d, ds, p, ph, hi)
         if regime=='RL':
             r -= np.mean(r)
             al,dl,rl = self.train(i,t,a,r,d,ds,pi,hi)

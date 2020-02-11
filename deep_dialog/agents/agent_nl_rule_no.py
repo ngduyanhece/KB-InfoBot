@@ -2,10 +2,10 @@
 '''
 
 from deep_dialog import dialog_config, tools
-from agent import Agent
-from softDB import SoftDB
-from belief_tracker import BeliefTracker
-from utils import *
+from .agent import Agent
+from .softDB import SoftDB
+from .belief_tracker import BeliefTracker
+from .utils import *
 
 from collections import Counter, defaultdict
 
@@ -16,7 +16,7 @@ import numpy as np
 import copy
 import re
 import nltk
-import cPickle as pkl
+import pickle as pkl
 
 class AgentNLRuleNoDB(Agent,SoftDB,BeliefTracker):
 
@@ -50,8 +50,8 @@ class AgentNLRuleNoDB(Agent,SoftDB,BeliefTracker):
             s_p = self.state['inform_slots'][s]/self.state['inform_slots'][s].sum()
             H_slots[s] = tools.entropy_p(s_p)
         if verbose:
-            print 'Agent slot belief entropies - '
-            print ' '.join(['%s:%.2f' %(k,v) for k,v in H_slots.iteritems()])
+            print('Agent slot belief entropies - ')
+            print(' '.join(['%s:%.2f' %(k,v) for k,v in H_slots.iteritems()]))
 
         sorted_entropies = sorted(H_slots.items(), key=operator.itemgetter(1), reverse=True)
         req = False

@@ -2,15 +2,15 @@
 '''
 
 import numpy as np
-import cPickle as pkl
+import pickle as pkl
 
 from deep_dialog import dialog_config, tools
 from collections import Counter, defaultdict, deque
-from agent_lu_rl import E2ERLAgent, aggregate_rewards
-from belief_tracker import BeliefTracker
-from softDB import SoftDB
-from feature_extractor import FeatureExtractor
-from utils import *
+from .agent_lu_rl import E2ERLAgent, aggregate_rewards
+from .belief_tracker import BeliefTracker
+from .softDB import SoftDB
+from .feature_extractor import FeatureExtractor
+from .utils import *
 
 import operator
 import random
@@ -73,15 +73,15 @@ class AgentE2ERLAllAct(E2ERLAgent,SoftDB,BeliefTracker):
             else: n_suc += 1
             tot += 1
         if len(args)>0:
-            print 'Update %d. Avg turns = %.2f . Avg Reward = %.2f . Success Rate = %.2f . Fail Rate = %.2f . Incomplete Rate = %.2f . Loss = %.3f . Time = %.2f' % \
+            print('Update %d. Avg turns = %.2f . Avg Reward = %.2f . Success Rate = %.2f . Fail Rate = %.2f . Incomplete Rate = %.2f . Loss = %.3f . Time = %.2f' % \
                     (self.num_updates, avg_turn, avg_ret, \
-                    float(n_suc)/tot, float(n_fail)/tot, float(n_inc)/tot, avg_loss, te)
+                    float(n_suc)/tot, float(n_fail)/tot, float(n_inc)/tot, avg_loss, te))
             #print 'kl loss = {}'.format(args[0])
             #print 'x_loss = {}'.format(args[1])
         else:
-            print 'Update %d. Avg turns = %.2f . Avg Reward = %.2f . Success Rate = %.2f . Fail Rate = %.2f . Incomplete Rate = %.2f . Loss = %.3f . Time = %.2f' % \
+            print('Update %d. Avg turns = %.2f . Avg Reward = %.2f . Success Rate = %.2f . Fail Rate = %.2f . Incomplete Rate = %.2f . Loss = %.3f . Time = %.2f' % \
                     (self.num_updates, avg_turn, avg_ret, \
-                    float(n_suc)/tot, float(n_fail)/tot, float(n_inc)/tot, avg_loss, te)
+                    float(n_suc)/tot, float(n_fail)/tot, float(n_inc)/tot, avg_loss, te))
 
     def initialize_episode(self):
         self.episode_count += 1

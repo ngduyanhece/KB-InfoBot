@@ -25,9 +25,9 @@ class DialogManager:
 
     def next_turn(self):
         if self.verbose:
-            print 'Turn', self.user_action['turn'], 'user action:', self.user_action['diaact'], \
-                    '\t', 'inform slots:', self.user_action['inform_slots']
-            print 'Utterance:', self.user_action['nl_sentence'], '\n'
+            print('Turn', self.user_action['turn'], 'user action:', self.user_action['diaact'], \
+                    '\t', 'inform slots:', self.user_action['inform_slots'])
+            print('Utterance:', self.user_action['nl_sentence'], '\n')
         
         self.sys_actions = self.agent.next(self.user_action, verbose=self.verbose)
     
@@ -41,7 +41,7 @@ class DialogManager:
         if episode_over: self.agent.terminate_episode(self.user_action)
         if episode_over and self.verbose:
             print("Agent Results:")
-            if 'phis' in self.sys_actions: print '\t'.join(['dont-care:']+['%.3f'%s for s in self.sys_actions['phis']])
+            if 'phis' in self.sys_actions: print('\t'.join(['dont-care:']+['%.3f'%s for s in self.sys_actions['phis']]))
             if self.sys_actions['target']:
                 for ii in self.sys_actions['target'][:dialog_config.SUCCESS_MAX_RANK]:
                     out = [self.database_incomplete.labels[ii]]

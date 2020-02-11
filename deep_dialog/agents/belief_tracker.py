@@ -56,7 +56,7 @@ class BeliefTracker:
                 for y, match in values.iteritems():
                     #y = self.movie_dict.dict[slot].index(val)
                     if verbose:
-                        print 'Detected %s' %self.movie_dict.dict[slot][y], ' update = ', match
+                        print('Detected %s' %self.movie_dict.dict[slot][y], ' update = ', match)
                     if matched and requested:
                         alpha = upd*(match + 1. + slot_match[slot])
                     elif matched and not requested:

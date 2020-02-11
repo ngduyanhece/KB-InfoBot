@@ -2,14 +2,14 @@
 '''
 
 import numpy as np
-import cPickle as pkl
+import pickle as pkl
 
 from deep_dialog import dialog_config, tools
 from collections import Counter, defaultdict, deque
-from agent_rl import RLAgent, aggregate_rewards
-from belief_tracker import BeliefTracker
-from softDB import SoftDB
-from utils import *
+from .agent_rl import RLAgent, aggregate_rewards
+from .belief_tracker import BeliefTracker
+from .softDB import SoftDB
+from .utils import *
 
 import operator
 import random
@@ -82,9 +82,9 @@ class AgentSimpleRLAllActNoDB(RLAgent,SoftDB,BeliefTracker):
             elif s==0: n_inc += 1
             else: n_suc += 1
             tot += 1
-        print 'Update %d. Avg turns = %.2f . Avg Reward = %.2f . Success Rate = %.2f . Fail Rate = %.2f . Incomplete Rate = %.2f . Loss = %.3f' % \
+        print('Update %d. Avg turns = %.2f . Avg Reward = %.2f . Success Rate = %.2f . Fail Rate = %.2f . Incomplete Rate = %.2f . Loss = %.3f' % \
                 (self.num_updates, avg_turn, avg_ret, \
-                float(n_suc)/tot, float(n_fail)/tot, float(n_inc)/tot, avg_loss)
+                float(n_suc)/tot, float(n_fail)/tot, float(n_inc)/tot, avg_loss))
 
     def initialize_episode(self):
         self.episode_count += 1

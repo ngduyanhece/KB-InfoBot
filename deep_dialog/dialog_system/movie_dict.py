@@ -2,7 +2,7 @@
 
 '''
 
-import cPickle as pickle
+import pickle as pickle
 import copy
 import nltk
 import string
@@ -22,12 +22,12 @@ class MovieDict:
 
     def count_values(self):
         self.lengths = {}
-        for k,v in self.dict.iteritems():
+        for k,v in self.dict.items():
             self.lengths[k] = len(v)
 
     def _build_token_index(self):
         self.tokens = {}
-        for slot,vals in self.dict.iteritems():
+        for slot,vals in self.dict.items():
             self.tokens[slot] = defaultdict(list)
             for vi,vv in enumerate(vals):
                 w_v = to_tokens(vv)

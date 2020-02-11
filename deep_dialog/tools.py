@@ -35,7 +35,7 @@ def entropy(items):
         return -1
     H = (H/N) + math.log(N,2)
     if math.isnan(H):
-        print '\n'.join(['%s:%.7f' %(k,v) for k,v in items.iteritems()])
+        print('\n'.join(['%s:%.7f' %(k,v) for k,v in items.items()]))
         sys.exit()
     return H
 

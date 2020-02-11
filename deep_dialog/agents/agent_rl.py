@@ -11,7 +11,7 @@ import sys
 from collections import Counter, defaultdict, deque
 
 import random
-import cPickle as pkl
+import pickle as pkl
 
 def categorical_sample(probs, mode='sample'):
     if mode=='max':
@@ -112,10 +112,10 @@ class RLAgent:
         self.train_fn = theano.function(self.inps, self.loss, updates=updates)
 
     def _debug(self, inp, tur, act, rew):
-        print 'Input = {}, Action = {}, Reward = {}'.format(inp, act, rew)
+        print('Input = {}, Action = {}, Reward = {}'.format(inp, act, rew))
         out = self.debug_fn(inp, tur, act, rew)
         for item in out:
-            print item
+            print(item)
 
     def _init_experience_pool(self, pool):
         self.input_pool = deque([], pool)
@@ -144,7 +144,7 @@ class RLAgent:
     def update(self, verbose=False, regime='RL'):
         i, t, a, r = self._get_minibatch(self.batch_size)
         pi = np.zeros((1,self.n_hid)).astype('float32')
-        if verbose: print i, t, a, r
+        if verbose: print(i, t, a, r)
         if regime=='RL':
             r -= np.mean(r)
             #r /= np.std(r)

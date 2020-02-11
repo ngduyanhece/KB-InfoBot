@@ -8,7 +8,7 @@ import argparse, json, time
 import random
 import copy
 import nltk
-import cPickle as pkl
+import pickle as pkl
 
 from deep_dialog import dialog_config
 from deep_dialog.tools import to_tokens
@@ -63,25 +63,25 @@ class CmdUser:
     ''' show target entity and known slots (corrupted) to user
         and get NL input '''
     def prompt_input(self, agent_act, turn):
-        print ''
-        print 'turn ', str(turn)
-        print 'agent action: ', agent_act
-        print 'target ', DOMAIN_NAME, ': ', self.database.labels[self.goal['target']]
-        print 'known slots: ', ' '.join(
+        print('')
+        print('turn ', str(turn))
+        print('agent action: ', agent_act)
+        print('target ', DOMAIN_NAME, ': ', self.database.labels[self.goal['target']])
+        print('known slots: ', ' '.join(
                 ['%s={ %s }' %(k,' , '.join(vv for vv in v)) 
-                    for k,v in self.state['inform_slots_noisy'].iteritems()])
+                    for k,v in self.state['inform_slots_noisy'].iteritems()]))
         inp = raw_input('your input: ')
         if not self._vocab_search(inp): return random.choice(GENERIC)
         else: return inp
 
     ''' display agent results at end of dialog '''
     def display_results(self, ranks, reward, turns):
-        print ''
-        print 'agent results: ', ', '.join([self.database.labels[ii] for ii in ranks[:5]])
-        print 'target movie rank = ', ranks.index(self.goal['target']) + 1
-        if reward > 0: print 'successful dialog!'
-        else: print 'failed dialog'
-        print 'number of turns = ', str(turns)
+        print('')
+        print('agent results: ', ', '.join([self.database.labels[ii] for ii in ranks[:5]]))
+        print('target movie rank = ', ranks.index(self.goal['target']) + 1)
+        if reward > 0: print('successful dialog!')
+        else: print('failed dialog')
+        print('number of turns = ', str(turns))
 
     ''' randomly sample a start state '''
     def _sample_action(self):
@@ -136,12 +136,12 @@ class CmdUser:
                         break
 
     def print_goal(self):
-        print 'User target = ', ', '.join(['%s:%s' %(s,v) for s,v in \
+        print('User target = ', ', '.join(['%s:%s' %(s,v) for s,v in \
                 zip(['movie']+self.database.slots, \
                 [self.database.labels[self.goal['target']]] + \
-                self.database.tuples[self.goal['target']])])
-        print 'User information = ', ', '.join(['%s:%s' %(s,v) for s,v in \
-                self.goal['inform_slots'].iteritems() if v is not None]), '\n'
+                self.database.tuples[self.goal['target']])]))
+        print('User information = ', ', '.join(['%s:%s' %(s,v) for s,v in \
+                self.goal['inform_slots'].iteritems() if v is not None]), '\n')
 
     ''' initialization '''
     def initialize_episode(self):
@@ -300,7 +300,7 @@ class CmdUser:
     ''' print the state '''
     def print_state(self, action):
         stateStr = 'Turn %d user action: %s, history slots: %s, inform_slots: %s, request slots: %s, rest_slots: %s' % (action['turn'], action['diaact'], action['history_slots'], action['inform_slots'], action['request_slots'], action['rest_slots'])
-        print stateStr
+        print(stateStr)
 
 
 
@@ -316,7 +316,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     params = vars(args)
 
-    print 'User Simulator Parameters: '
-    print json.dumps(params, indent=2)
+    print('User Simulator Parameters: ')
+    print(json.dumps(params, indent=2))
 
     main(params)

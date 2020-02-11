@@ -66,7 +66,7 @@ class Database:
         try:
             slot_index = self.slots.index(slot)
         except ValueError:
-            print 'Slot not found!!!'
+            print('Slot not found!!!')
             return
         for row in self.tuples: del row[slot_index]
         self.table = np.delete(self.table, slot_index, axis=1)

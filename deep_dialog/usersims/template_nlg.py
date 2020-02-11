@@ -3,7 +3,7 @@
 Takes user action and templates from file and produces NL utterance. 
 '''
 
-import cPickle as pkl
+import pickle as pkl
 import random
 
 class TemplateNLG:

@@ -4,14 +4,14 @@ Takes user action and produces NL utterance using Xiujun's NLG
 Backs off to template nlg
 '''
 
-import cPickle as pkl
+import pickle as pkl
 import random
 import copy
 import sys
-
-from NLG import predict
-from NLG.decoders.lstm_decoder_tanh import lstm_decoder_tanh
-from NLG.decoders.decoder import decoder
+import io
+from .NLG import predict
+from .NLG.decoders.lstm_decoder_tanh import lstm_decoder_tanh
+from .NLG.decoders.decoder import decoder
 
 BEAM_SIZE = 3
 SAMPLING = 1
@@ -23,7 +23,7 @@ class S2SNLG:
         self._load_model(model_file, temp)
 
     def _load_model(self, model_path, temp):
-        model_params = pkl.load(open(model_path, 'rb'))
+        model_params = pkl.load(io.open(model_path, 'rb'))
         hidden_size = model_params['model']['Wd'].shape[0]
         output_size = model_params['model']['Wd'].shape[1]
 
@@ -111,8 +111,8 @@ if __name__=='__main__':
             for s in i_slots:
                 inform_slots[s] = u'blah'
             request_slots = {}
-            print a, inform_slots, request_slots
-            print nlg.generate(a, inform_slots, request_slots)
+            print(a, inform_slots, request_slots)
+            print(nlg.generate(a, inform_slots, request_slots))
         else:
             request_slots = {}
             request_slots['moviename'] = 'UNK'
@@ -120,5 +120,5 @@ if __name__=='__main__':
             i_slots = random.sample(slots, 2)
             for s in i_slots:
                 inform_slots[s] = u'blah'
-            print a, inform_slots, request_slots
-            print nlg.generate(a, inform_slots, request_slots)
+            print(a, inform_slots, request_slots)
+            print(nlg.generate(a, inform_slots, request_slots))

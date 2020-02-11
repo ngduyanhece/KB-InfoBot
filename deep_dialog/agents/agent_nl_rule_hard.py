@@ -2,10 +2,10 @@
 '''
 
 from deep_dialog import dialog_config, tools
-from agent import Agent
-from hardDB import HardDB
-from belief_tracker import BeliefTracker
-from utils import *
+from .agent import Agent
+from .hardDB import HardDB
+from .belief_tracker import BeliefTracker
+from .utils import *
 
 from collections import Counter, defaultdict
 
@@ -13,7 +13,7 @@ import operator
 import random
 import math
 import numpy as np
-import cPickle as pkl
+import pickle as pkl
 import copy
 import re
 import nltk
@@ -52,8 +52,8 @@ class AgentNLRuleHard(Agent,HardDB,BeliefTracker):
             H_slots[s] = tools.entropy_p(s_p)
         sorted_entropies = sorted(H_slots.items(), key=operator.itemgetter(1), reverse=True)
         if verbose:
-            print 'Agent slot belief entropies - '
-            print ' '.join(['%s:%.2f' %(k,v) for k,v in H_slots.iteritems()])
+            print('Agent slot belief entropies - ')
+            print(' '.join(['%s:%.2f' %(k,v) for k,v in H_slots.iteritems()]))
 
         if not db_status:
             # no match, some error, re-ask some slot

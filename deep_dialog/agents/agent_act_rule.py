@@ -2,7 +2,7 @@
 '''
 
 from deep_dialog import dialog_config, tools
-from agent import Agent
+from .agent import Agent
 
 import operator
 import random

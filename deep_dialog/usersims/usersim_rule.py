@@ -106,12 +106,12 @@ class RuleSimulator:
                         break
 
     def print_goal(self):
-        print 'User target = ', ', '.join(['%s:%s' %(s,v) for s,v in \
+        print('User target = ', ', '.join(['%s:%s' %(s,v) for s,v in \
                 zip(['movie']+self.database.slots, \
                 [self.database.labels[self.goal['target']]] + \
-                self.database.tuples[self.goal['target']])])
-        print 'User information = ', ', '.join(['%s:%s' %(s,v) for s,v in \
-                self.goal['inform_slots'].iteritems() if v is not None]), '\n'
+                self.database.tuples[self.goal['target']])]))
+        print('User information = ', ', '.join(['%s:%s' %(s,v) for s,v in \
+                self.goal['inform_slots'].iteritems() if v is not None]), '\n')
 
     ''' initialization '''
     def initialize_episode(self):
@@ -228,7 +228,7 @@ class RuleSimulator:
     ''' print the state '''
     def print_state(self, action):
         stateStr = 'Turn %d user action: %s, history slots: %s, inform_slots: %s, request slots: %s, rest_slots: %s' % (action['turn'], action['diaact'], action['history_slots'], action['inform_slots'], action['request_slots'], action['rest_slots'])
-        print stateStr
+        print(stateStr)
 
 
 
@@ -244,7 +244,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     params = vars(args)
 
-    print 'User Simulator Parameters: '
-    print json.dumps(params, indent=2)
+    print('User Simulator Parameters: ')
+    print(json.dumps(params, indent=2))
 
     main(params)
