@@ -58,7 +58,7 @@ class RuleSimulator:
                     self.state['inform_slots'][s] = self.goal['inform_slots'][s]
             
             if len(self.goal['request_slots']) > 0:
-                request_slot = random.choice(self.goal['request_slots'].keys())
+                request_slot = random.choice(list(self.goal['request_slots'].keys()))
                 self.state['request_slots'][request_slot] = 'UNK'
         
         if (self.state['diaact'] in ['thanks','closing']): episode_over = True
@@ -98,7 +98,7 @@ class RuleSimulator:
                     self.goal['inform_slots'][s] = None
             if all([v==None for v in self.goal['inform_slots'].values()]):
                 while True:
-                    s = random.choice(self.goal['inform_slots'].keys())
+                    s = random.choice(list(self.goal['inform_slots'].keys()))
                     i = self.database.slots.index(s)
                     val = self.database.tuples[self.goal['target']][i]
                     if val!='UNK':
