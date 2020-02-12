@@ -57,10 +57,10 @@ class S2SNLG:
 
     def generate_from_nlg(self, act, request_slots, inform_slots):
         act_string = act + '('
-        for s,v in request_slots.iteritems():
+        for s,v in request_slots.items():
             act_string += '%s=%s;' % (s,v) if v!='UNK' else '%s;' %s
-        i_slots = {k:v for k,v in inform_slots.iteritems() if v is not None}
-        for s,v in i_slots.iteritems():
+        i_slots = {k:v for k,v in inform_slots.items() if v is not None}
+        for s,v in i_slots.items():
             act_string += '%s=%s;' % (s,v)
         act_string = act_string.rstrip(';')
         act_string += ')'
@@ -73,7 +73,7 @@ class S2SNLG:
 
     def generate_from_template(self, act, request_slots, inform_slots):
         n_r = len(request_slots.keys())
-        i_slots = {k:v for k,v in inform_slots.iteritems() if v is not None}
+        i_slots = {k:v for k,v in inform_slots.items() if v is not None}
         n_i = len(i_slots.keys())
         key = '%s_%d_%d' % (act, n_r, n_i)
 
