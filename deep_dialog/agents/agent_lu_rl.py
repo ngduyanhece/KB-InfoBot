@@ -51,7 +51,7 @@ def ordered_sample(probs, N, mode='sample'):
 
 def aggregate_rewards(rewards,discount):
     running_add = 0.
-    for t in xrange(1,len(rewards)):
+    for t in range(1,len(rewards)):
         running_add += rewards[t]*discount**(t-1)
     return running_add
 
