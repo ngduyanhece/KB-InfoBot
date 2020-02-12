@@ -242,10 +242,10 @@ class E2ERLAgent:
 
         self.inps = [input_var, turn_mask, act_mask, reward_var, db_index_var, db_index_switch, \
                 pol_in] + hid_in_vars
-        self.obj_fn = theano.function(self.inps, self.loss, on_unused_input='warn')
+        self.obj_fn = theano.function(self.inps, self.loss, on_unused_input='warn',allow_input_downcast=True)
         self.act_fn = theano.function([input_var,turn_mask,pol_in]+hid_in_vars, \
-                [out_probs,p_db,pol_out]+pu_vars+phi_vars+hid_out_vars, on_unused_input='warn')
-        self.debug_fn = theano.function(self.inps, [probs, p_db, self.loss], on_unused_input='warn')
+                [out_probs,p_db,pol_out]+pu_vars+phi_vars+hid_out_vars, on_unused_input='warn',allow_input_downcast=True)
+        self.debug_fn = theano.function(self.inps, [probs, p_db, self.loss], on_unused_input='warn',allow_input_downcast=True)
         self._rl_train_fn(self.learning_rate)
 
         ## sl
@@ -266,8 +266,8 @@ class E2ERLAgent:
 
         sl_inps = [input_var, turn_mask, act_mask, pol_in] + p_targets + phi_targets + hid_in_vars
         self.sl_train_fn = theano.function(sl_inps, [sl_loss]+kl_loss+x_loss, updates=sl_updates, \
-                on_unused_input='warn')
-        self.sl_obj_fn = theano.function(sl_inps, sl_loss, on_unused_input='warn')
+                on_unused_input='warn',allow_input_downcast=True)
+        self.sl_obj_fn = theano.function(sl_inps, sl_loss, on_unused_input='warn',allow_input_downcast=True)
 
     def _rl_train_fn(self, lr):
         if self.rl=='e2e':
@@ -282,7 +282,7 @@ class E2ERLAgent:
                     epsilon=1e-4)
             updates_with_mom = lasagne.updates.apply_momentum(updates)
         self.train_fn = theano.function(self.inps, [self.act_loss,self.db_loss,self.reg_loss], \
-                updates=updates)
+                updates=updates,allow_input_downcast=True)
 
     def train(self, inp, tur, act, rew, db, dbs, pin, hin):
         return self.train_fn(inp, tur, act, rew, db, dbs, pin, *hin)
