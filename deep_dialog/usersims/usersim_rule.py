@@ -43,7 +43,7 @@ class RuleSimulator:
     def _sample_action(self):
         self.state = {}
         
-        self.state['diaact'] = random.choice(dialog_config.start_dia_acts.keys())
+        self.state['diaact'] = random.choice(list(dialog_config.start_dia_acts.keys()))
         self.state['turn'] = 0
         self.state['inform_slots'] = {}
         self.state['request_slots'] = {}
