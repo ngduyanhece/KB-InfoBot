@@ -83,8 +83,8 @@ class S2SNLG:
         return unicode(sent)
 
     def _fill_slots(self, temp, request_slots, i_slots):
-        reqs = request_slots.keys()
-        infs = i_slots.keys()
+        reqs = list(request_slots.keys())
+        infs = list(i_slots.keys())
         random.shuffle(reqs)
         random.shuffle(infs)
 
