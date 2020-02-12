@@ -149,7 +149,7 @@ class RuleSimulator:
                     reward = dialog_config.FAILED_DIALOG_REWARD
                     self.state['diaact'] = 'deny'
             elif act == 'request':
-                slot = state['request_slots'].keys()[0]
+                slot = list(state['request_slots'].keys())[0]
                 if slot in self.goal['inform_slots']:
                     self.state['inform_slots'][slot] = self.goal['inform_slots'][slot]
                 else:
