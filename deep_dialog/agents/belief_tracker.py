@@ -17,7 +17,7 @@ class BeliefTracker:
 
     def _search_slots(self, s_t):
         matches = {}
-        for slot,slot_t in self.state['database'].slot_tokens.iteritems():
+        for slot,slot_t in self.state['database'].slot_tokens.items():
             m = self._search(slot_t,s_t)
             if m>0.: 
                 matches[slot] = m
@@ -31,7 +31,7 @@ class BeliefTracker:
                 if ss in self.movie_dict.tokens[slot]:
                     for vi in self.movie_dict.tokens[slot][ss]:
                         matches[slot][vi] += 1.
-            for vi,f in matches[slot].iteritems():
+            for vi,f in matches[slot].items():
                 val = self.movie_dict.dict[slot][vi]
                 matches[slot][vi] = f/len(nltk.word_tokenize(val))
         return matches
@@ -44,7 +44,7 @@ class BeliefTracker:
         slot_match = self._search_slots(s_t) # search slots
         val_match = self._search_values(s_t) # search values
 
-        for slot, values in val_match.iteritems():
+        for slot, values in val_match.items():
             requested = (prev_act=='request') and (prev_slot==slot)
             matched = (slot in slot_match)
             if not values:
@@ -53,7 +53,7 @@ class BeliefTracker:
                     self.state['num_requests'][slot] = 1000
                     self.state['dont_care'].add(slot)
             else:
-                for y, match in values.iteritems():
+                for y, match in values.items():
                     #y = self.movie_dict.dict[slot].index(val)
                     if verbose:
                         print('Detected %s' %self.movie_dict.dict[slot][y], ' update = ', match)
