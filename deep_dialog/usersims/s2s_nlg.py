@@ -12,6 +12,9 @@ import io
 from .NLG import predict
 from .NLG.decoders.lstm_decoder_tanh import lstm_decoder_tanh
 from .NLG.decoders.decoder import decoder
+import sys
+if sys.version_info[0] >= 3:
+    unicode = str
 
 BEAM_SIZE = 3
 SAMPLING = 1
