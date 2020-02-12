@@ -44,7 +44,7 @@ def ordered_sample(probs, N, mode='sample'):
         for i in range(N):
             s = categorical_sample(p)
             sample.append(pop[s])
-            del list(pop[s])
+            #del list(pop[s])
             p = np.delete(p,s)
             p = p/p.sum()
         return sample
