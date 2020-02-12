@@ -178,7 +178,7 @@ class AgentE2ERLAllAct(E2ERLAgent,SoftDB,BeliefTracker):
             self.state['indices'] = np.asarray(act['target'][:dialog_config.SUCCESS_MAX_RANK], \
                     dtype='int32')
         else:
-            req = act['request_slots'].keys()[0]
+            req = list(act['request_slots'].keys())[0]
             self.state['prevact'] = 'request@%s' %req
             self.state['num_requests'][req] += 1
         self.state['inputs'].append(p[0,0,:])
