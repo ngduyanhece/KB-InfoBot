@@ -8,7 +8,7 @@ def standardize(arr):
 
 def calc_entropies(state, q, db):
     entropies = {}
-    for s,c in state.iteritems():
+    for s,c in state.items():
         if s not in db.slots:
             entropies[s] = 0.
         else:
