@@ -260,7 +260,7 @@ class AgentE2ERLAllAct(E2ERLAgent,SoftDB,BeliefTracker):
                 for i in range(len(dialog_config.inform_slots))]
         phi_targets = [np.zeros((self.max_turn,)).astype('float32') \
                 for i in range(len(dialog_config.inform_slots))]
-        for t in xrange(0,self.state['turn']):
+        for t in range(0,self.state['turn']):
             actmask[t,self.state['actions'][t]] = 1
             inp[t,:] = self.state['inputs'][t]
             turnmask[t] = 1
