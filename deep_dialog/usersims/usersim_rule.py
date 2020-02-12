@@ -51,7 +51,7 @@ class RuleSimulator:
         
         if (len(self.goal['inform_slots']) + len(self.goal['request_slots'])) > 0:
             if len(self.goal['inform_slots']) > 0:
-                care_about = [s for s,v in self.goal['inform_slots'].iteritems() if v is not None]
+                care_about = [s for s,v in self.goal['inform_slots'].items() if v is not None]
                 known_slots = random.sample(care_about, 
                         random.randint(1,min(self.max_first_turn,len(care_about))))
                 for s in known_slots:
@@ -111,7 +111,7 @@ class RuleSimulator:
                 [self.database.labels[self.goal['target']]] + \
                 self.database.tuples[self.goal['target']])]))
         print('User information = ', ', '.join(['%s:%s' %(s,v) for s,v in \
-                self.goal['inform_slots'].iteritems() if v is not None]), '\n')
+                self.goal['inform_slots'].items() if v is not None]), '\n')
 
     ''' initialization '''
     def initialize_episode(self):
