@@ -43,7 +43,6 @@ class BeliefTracker:
         s_t = to_tokens(user_utterance)
         slot_match = self._search_slots(s_t) # search slots
         val_match = self._search_values(s_t) # search values
-
         for slot, values in val_match.items():
             requested = (prev_act=='request') and (prev_slot==slot)
             matched = (slot in slot_match)

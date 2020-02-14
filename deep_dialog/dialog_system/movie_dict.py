@@ -17,7 +17,11 @@ class MovieDict:
         self._build_token_index()
     
     def load_dict(self, path):
-        dict_data = pickle.load(open(path, 'rb'))
+        with open(path, 'rb') as f:
+            u = pickle._Unpickler(f)
+            u.encoding = 'latin1'
+            dict_data = u.load()
+        #dict_data = pickle.load(open(path, 'rb'))
         self.dict = copy.deepcopy(dict_data)
 
     def count_values(self):

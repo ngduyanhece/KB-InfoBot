@@ -23,7 +23,7 @@ parser.add_argument('--db', dest='db', type=str, default='imdb-M',
         help='imdb-(S/M/L/XL) -- This is the KB split to use, e.g. imdb-M')
 parser.add_argument('--model_name', dest='model_name', type=str, default='no_name', 
         help='model name to save')
-parser.add_argument('--N', dest='N', type=int, default=500000, help='Number of simulations')
+parser.add_argument('--N', dest='N', type=int, default=100000, help='Number of simulations')
 parser.add_argument('--max_turn', dest='max_turn', default=20, type=int, 
         help='maximum length of each dialog (default=20, 0=no maximum length)')
 parser.add_argument('--nlg_temp', dest='nlg_temp', type=float, default=1., 
@@ -79,21 +79,40 @@ from deep_dialog.agents import AgentSimpleRLAllActNoDB, AgentE2ERLAllAct
 from deep_dialog.usersims import RuleSimulator, TemplateNLG, S2SNLG
 from deep_dialog.objects import SlotReader
 from deep_dialog import dialog_config
-
+print("==============================================")
+print("reading action set")
+print("==============================================")
 act_set = DictReader()
 act_set.load_dict_from_file(params['act_set'])
+print(act_set.dict)
 
+
+print("==============================================")
+print("reading slot set")
+print("==============================================")
 slot_set = SlotReader(slot_path)
+print(slot_set.slot_groups)
+
+print("==============================================")
+print("reading movie kb")
+print("==============================================")
 
 movie_kb = MovieDict(dict_path)
-
 db_full = Database(db_full_path, movie_kb, name=params['dataset'])
 db_inc = Database(db_inc_path, movie_kb, name='incomplete%.2f_'%params['unk']+params['dataset'])
+
+print("==============================================")
+print("init nlg")
+print("==============================================")
 
 nlg = S2SNLG(template_path, params['nlg_slots_path'], params['nlg_model_path'], 
         params['nlg_temp'])
 user_sim = RuleSimulator(movie_kb, act_set, slot_set, None, max_turn, nlg, err_prob, db_full, \
         1.-dk_prob, sub_prob=params['sub_prob'], max_first_turn=params['max_first_turn'])
+
+print("==============================================")
+print("init agent")
+print("==============================================")
 
 if agent_type == 'simple-rl-soft':
     agent = AgentSimpleRLAllAct(movie_kb, act_set, slot_set, db_inc, _reload=_reload,
@@ -153,6 +172,9 @@ elif agent_type == 'e2e-rl-soft':
 else:
     print("Invalid agent!")
     sys.exit()
+print("==============================================")
+print("init dialog manager")
+print("==============================================")
 
 dialog_manager = DialogManager(agent, user_sim, db_full, db_inc, movie_kb, verbose=False)
 dialog_manager_eval = DialogManager(agent_eval, user_sim, db_full, db_inc, movie_kb, 
@@ -191,13 +213,16 @@ def eval_agent(ite, max_perf, best=False):
         max_perf=curr_perf
         agent_eval.save_model(dialog_config.MODEL_PATH+'best_'+agent_eval._name)
     return max_perf
-
+print("==============================================")
 print("Starting training")
+print("==============================================")
 mp = -10.
 for i in range(N):
     if i%(EVALF*params['batch'])==0:
-        mp = eval_agent(i,mp)
+       mp = eval_agent(i,mp)
+    print('start to initialize the episode')
     utt = dialog_manager.initialize_episode()
+    print('initialize done')
     while(True):
         episode_over, reward, utt, sact = dialog_manager.next_turn()
         if episode_over:

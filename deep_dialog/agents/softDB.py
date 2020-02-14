@@ -24,4 +24,5 @@ class SoftDB:
         p_db = np.sum(np.log(p_s), axis=1)
         p_db = np.exp(p_db - np.min(p_db))
         p_db = p_db/p_db.sum()
+        #print('shape of p_db: {}'.format(p_db.shape))
         return p_db
