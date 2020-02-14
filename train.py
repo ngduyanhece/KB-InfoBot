@@ -220,9 +220,9 @@ mp = -10.
 for i in range(N):
     if i%(EVALF*params['batch'])==0:
        mp = eval_agent(i,mp)
-    print('start to initialize the episode')
+    #print('start to initialize the episode')
     utt = dialog_manager.initialize_episode()
-    print('initialize done')
+    3print('initialize done')
     while(True):
         episode_over, reward, utt, sact = dialog_manager.next_turn()
         if episode_over:
