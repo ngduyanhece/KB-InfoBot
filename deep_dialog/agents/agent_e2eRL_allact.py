@@ -133,7 +133,6 @@ class AgentE2ERLAllAct(E2ERLAgent,SoftDB,BeliefTracker):
         if self.state['turn']>1:
             pr_act = self.state['prevact'].split('@')
             assert pr_act[0]!='inform', 'Agent called after informing!'
-            print(pr_act)
             act_id = dialog_config.inform_slots.index(pr_act[1])
             p_vector[self.feat_extractor.n+act_id] = 1
         p_vector = np.expand_dims(np.expand_dims(p_vector, axis=0), axis=0)
