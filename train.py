@@ -222,7 +222,7 @@ for i in range(N):
        mp = eval_agent(i,mp)
     #print('start to initialize the episode')
     utt = dialog_manager.initialize_episode()
-    3print('initialize done')
+    #print('initialize done')
     while(True):
         episode_over, reward, utt, sact = dialog_manager.next_turn()
         if episode_over:
