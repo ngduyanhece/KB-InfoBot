@@ -19,7 +19,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument('--agent', dest='agent_type', type=str, default='rule-soft', 
         help='agent to use (rl-no / rl-hard / rl-soft / e2e-soft)')
-parser.add_argument('--db', dest='db', type=str, default='imdb-M', 
+parser.add_argument('--db', dest='db', type=str, default='babe', 
         help='imdb-(S/M/L/XL) -- This is the KB split to use, e.g. imdb-M')
 parser.add_argument('--model_name', dest='model_name', type=str, default='no_name', 
         help='model name to save')
@@ -43,8 +43,8 @@ args = parser.parse_args()
 params = vars(args)
 
 params['act_set'] = './data/dia_acts.txt'
-params['template_path'] = './data/templates.p'
-params['nlg_slots_path'] = './data/nlg_slot_set.txt'
+params['template_path'] = './data/babe_shop_template.json'
+params['nlg_slots_path'] = './data/babe_nlg_slot_set.txt'
 params['nlg_model_path'] = './data/pretrained/lstm_tanh_[1470015675.73]_115_120_0.657.p'
 
 config = importlib.import_module('settings.config_'+params['db'])

@@ -13,6 +13,7 @@ from .NLG import predict
 from .NLG.decoders.lstm_decoder_tanh import lstm_decoder_tanh
 from .NLG.decoders.decoder import decoder
 import sys
+import json
 if sys.version_info[0] >= 3:
     unicode = str
 
@@ -21,9 +22,11 @@ SAMPLING = 1
 
 class S2SNLG:
     def __init__(self, template_file, slot_file, model_file, temp):
-        self.templates = pkl.load(open(template_file, 'rb'))
+        #self.templates = pkl.load(open(template_file, 'rb'))
+        with open(template_file, 'r') as f:
+            self.templates = json.load(f)
         self._read_slots(slot_file)
-        self._load_model(model_file, temp)
+        #self._load_model(model_file, temp)
 
     def _load_model(self, model_path, temp):
         with open(model_path, 'rb') as f:
@@ -52,11 +55,11 @@ class S2SNLG:
             self.slots.append(line.rstrip())
 
     def generate(self, act, request_slots, inform_slots):
-        if all([r in self.slots for r in request_slots.keys()]) and \
-                all([i in self.slots for i in inform_slots.keys()]):
-            return self.generate_from_nlg(act, request_slots, inform_slots)
-        else:
-            return self.generate_from_template(act, request_slots, inform_slots)
+        # if all([r in self.slots for r in request_slots.keys()]) and \
+        #         all([i in self.slots for i in inform_slots.keys()]):
+        #     return self.generate_from_nlg(act, request_slots, inform_slots)
+        # else:
+        return self.generate_from_template(act, request_slots, inform_slots)
 
     def generate_from_nlg(self, act, request_slots, inform_slots):
         act_string = act + '('

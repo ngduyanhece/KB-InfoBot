@@ -2,13 +2,13 @@
 '''
 
 all_acts = ['request', 'inform']
-inform_slots = ['actor','critic_rating','genre','mpaa_rating','director','release_year']
+inform_slots = ['brand','color']
 
-sys_request_slots = ['actor', 'critic_rating', 'genre', 'mpaa_rating', 'director', 'release_year']
+sys_request_slots = ['brand','color','material']
 
 start_dia_acts = {
     #'greeting':[],
-    'request':['moviename', 'starttime', 'theater', 'city', 'state', 'date', 'genre', 'ticket', 'numberofpeople', 'numberofkids']
+    'request':['brand', 'color']
 }   
 
 #reward information

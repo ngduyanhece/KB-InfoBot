@@ -9,6 +9,7 @@ import string
 
 from collections import defaultdict
 from deep_dialog.tools import to_tokens
+import json
 
 class MovieDict:
     def __init__(self, path):
@@ -17,10 +18,12 @@ class MovieDict:
         self._build_token_index()
     
     def load_dict(self, path):
-        with open(path, 'rb') as f:
-            u = pickle._Unpickler(f)
-            u.encoding = 'latin1'
-            dict_data = u.load()
+        # with open(path, 'rb') as f:
+        #     u = pickle._Unpickler(f)
+        #     u.encoding = 'latin1'
+        #     dict_data = u.load()
+        with open(path, 'r') as f:
+            dict_data = json.load(f)
         #dict_data = pickle.load(open(path, 'rb'))
         self.dict = copy.deepcopy(dict_data)
 

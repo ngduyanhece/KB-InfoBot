@@ -12,9 +12,12 @@ from nltk.corpus import stopwords
 EXC = set(string.punctuation)
 
 def to_tokens(text):
-    utt = ''.join(ch for ch in text if ch not in EXC)
-    tokens = nltk.word_tokenize(utt.lower())
-    return [w for w in tokens if w not in stopwords.words('english')]
+    #token tokenizer for vietnamese
+    #utt = ''.join(ch for ch in text if ch not in EXC)
+    #tokens = nltk.word_tokenize(utt.lower())
+    #tokens = text.split(' ')
+    #eturn [w for w in tokens if w not in stopwords.words('english')]
+    return text.split(' ')
 
 def entropy(items):
     if type(items) is Counter or type(items) is dict:
