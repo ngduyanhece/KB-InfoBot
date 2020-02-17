@@ -2,7 +2,7 @@
 '''
 
 all_acts = ['request', 'inform']
-inform_slots = ['brand','color']
+inform_slots = ['brand','color','material']
 
 sys_request_slots = ['brand','color','material']
 

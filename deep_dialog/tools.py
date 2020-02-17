@@ -17,7 +17,7 @@ def to_tokens(text):
     #tokens = nltk.word_tokenize(utt.lower())
     #tokens = text.split(' ')
     #eturn [w for w in tokens if w not in stopwords.words('english')]
-    return text.split(' ')
+    return text.lower().split(' ')
 
 def entropy(items):
     if type(items) is Counter or type(items) is dict:

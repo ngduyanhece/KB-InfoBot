@@ -28,7 +28,7 @@ parser.add_argument('--max_turn', dest='max_turn', default=20, type=int,
         help='maximum length of each dialog (default=20, 0=no maximum length)')
 parser.add_argument('--nlg_temp', dest='nlg_temp', type=float, default=1., 
         help='Natural Language Generator softmax temperature (to control noise)')
-parser.add_argument('--max_first_turn', dest='max_first_turn', type=int, default=5, 
+parser.add_argument('--max_first_turn', dest='max_first_turn', type=int, default=2, 
         help='Maximum number of slots informed by user in first turn')
 parser.add_argument('--err_prob', dest='err_prob', default=0.5, type=float, 
         help='the probability of the user simulator corrupting a slot value')
@@ -176,12 +176,12 @@ print("==============================================")
 print("init dialog manager")
 print("==============================================")
 
-dialog_manager = DialogManager(agent, user_sim, db_full, db_inc, movie_kb, verbose=False)
+dialog_manager = DialogManager(agent, user_sim, db_full, db_inc, movie_kb, verbose=True)
 dialog_manager_eval = DialogManager(agent_eval, user_sim, db_full, db_inc, movie_kb, 
         verbose=False)
 
 def eval_agent(ite, max_perf, best=False):
-    num_iter = 2000
+    num_iter = 100
     nn = np.sqrt(num_iter)
     if best: agent_eval.load_model(dialog_config.MODEL_PATH+'best_'+agent_eval._name)
     else: agent_eval.load_model(dialog_config.MODEL_PATH+agent_eval._name)
@@ -217,7 +217,7 @@ print("==============================================")
 print("Starting training")
 print("==============================================")
 mp = -10.
-for i in range(N):
+for i in range(10):
     if i%(EVALF*params['batch'])==0:
        mp = eval_agent(i,mp)
     #print('start to initialize the episode')
