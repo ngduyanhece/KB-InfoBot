@@ -176,12 +176,12 @@ print("==============================================")
 print("init dialog manager")
 print("==============================================")
 
-dialog_manager = DialogManager(agent, user_sim, db_full, db_inc, movie_kb, verbose=True)
+dialog_manager = DialogManager(agent, user_sim, db_full, db_inc, movie_kb, verbose=False)
 dialog_manager_eval = DialogManager(agent_eval, user_sim, db_full, db_inc, movie_kb, 
-        verbose=False)
+        verbose=True)
 
 def eval_agent(ite, max_perf, best=False):
-    num_iter = 100
+    num_iter = 4
     nn = np.sqrt(num_iter)
     if best: agent_eval.load_model(dialog_config.MODEL_PATH+'best_'+agent_eval._name)
     else: agent_eval.load_model(dialog_config.MODEL_PATH+agent_eval._name)
@@ -217,7 +217,7 @@ print("==============================================")
 print("Starting training")
 print("==============================================")
 mp = -10.
-for i in range(2):
+for i in range(N):
     if i%(EVALF*params['batch'])==0:
        mp = eval_agent(i,mp)
     #print('start to initialize the episode')
