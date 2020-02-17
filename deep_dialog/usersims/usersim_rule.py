@@ -11,7 +11,7 @@ import nltk
 
 from deep_dialog import dialog_config
 
-DOMAIN_NAME = 'movie'
+DOMAIN_NAME = 'babe'
 
 def weighted_choice(choices, weights):
     total = sum(weights)
@@ -107,7 +107,7 @@ class RuleSimulator:
 
     def print_goal(self):
         print('User target = ', ', '.join(['%s:%s' %(s,v) for s,v in \
-                zip(['movie']+self.database.slots, \
+                zip(['product:']+self.database.slots, \
                 [self.database.labels[self.goal['target']]] + \
                 self.database.tuples[self.goal['target']])]))
         print('User information = ', ', '.join(['%s:%s' %(s,v) for s,v in \
