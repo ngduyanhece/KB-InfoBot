@@ -217,7 +217,7 @@ print("==============================================")
 print("Starting training")
 print("==============================================")
 mp = -10.
-for i in range(1):
+for i in range(2):
     if i%(EVALF*params['batch'])==0:
        mp = eval_agent(i,mp)
     #print('start to initialize the episode')
