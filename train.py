@@ -30,11 +30,11 @@ parser.add_argument('--nlg_temp', dest='nlg_temp', type=float, default=1.,
         help='Natural Language Generator softmax temperature (to control noise)')
 parser.add_argument('--max_first_turn', dest='max_first_turn', type=int, default=2, 
         help='Maximum number of slots informed by user in first turn')
-parser.add_argument('--err_prob', dest='err_prob', default=0.5, type=float, 
+parser.add_argument('--err_prob', dest='err_prob', default=0.0, type=float, 
         help='the probability of the user simulator corrupting a slot value')
-parser.add_argument('--dontknow_prob', dest='dontknow_prob', default=0.5, type=float, 
+parser.add_argument('--dontknow_prob', dest='dontknow_prob', default=0.1, type=float, 
         help='the probability that user simulator does not know a slot value')
-parser.add_argument('--sub_prob', dest='sub_prob', default=0.05, type=float, 
+parser.add_argument('--sub_prob', dest='sub_prob', default=0.0, type=float, 
         help='the probability that user simulator substitutes a slot value')
 parser.add_argument('--reload', dest='reload', type=int, default=0, 
         help='Reload previously saved model (0-no, 1-yes)')
