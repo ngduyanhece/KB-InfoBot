@@ -57,6 +57,7 @@ class DialogManager:
                         else:
                             val = self.database_incomplete.tuples[ii][it]
                             out.append('%s'%val)
+                    print(out)
                     #print('\t'.join([o.encode('latin-1', 'replace') for o in str(out)]))
 
         return (episode_over, reward, self.user_action, self.sys_actions)
